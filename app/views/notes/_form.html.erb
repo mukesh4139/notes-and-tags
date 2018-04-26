@@ -1,25 +1,71 @@
-<%= form_for(@note) do |f| %>
-  <% if @note.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+<%= form_for @note, :html => { :class => 'form-horizontal' } do |f| %>
+    <% if @note.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
 
-      <ul>
-      <% @note.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @note.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <br>
+
+    <div class="form-group">
+      <%= f.label :title, :class => 'col-sm-2 control-label' %>
+      <div class="col-sm-4">
+        <%= f.text_field :title, :class => 'form-control', :required => true %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_field :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group">
+      <%= f.label :body, :class => 'col-sm-2 control-label' %><br>
+      <div class="col-sm-4">
+        <%= f.text_area :body, :class => 'form-control', :rows => 5, :required => true %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :tags, :class => 'col-sm-2 control-label'%>
+      <div class="col-sm-3">
+        <% index = 1 %>
+        <%= f.fields_for :tags do |t| %>
+            <div class="single-tag" id="tag-<%= index %>" style="display: <%= index == 1 ? '' : 'none' %>">
+              <%= t.text_field :title, :class => 'form-control'%>
+            </div>
+            <% index += 1 %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2" >
+        <div class="col-sm-2 btn btn-default" id="more-tags"> Add More Tags </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <div class="col-sm-offset-2">
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= link_to 'Cancel', root_path, :class => 'btn btn-default' %>
+      </div>
+    </div>
 <% end %>
+
+<script>
+  $(document).ready(function(){
+    var tagIndex = 1;
+    var maxNoTags = 10;
+
+    $('#more-tags').click(function(){
+      tagIndex = tagIndex + 1;
+      if(tagIndex > maxNoTags) {
+        alert("Could not add more than " + maxNoTags + " timings");
+      } else {
+        $('#tag-' + tagIndex).toggle();
+      }
+    })
+  })
+</script>

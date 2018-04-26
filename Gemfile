@@ -12,9 +12,19 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
-#
+# Mongoid for MongoDB
 gem 'mongoid'
 gem 'bson_ext'
+
+# For Bootstrap
+gem 'bootstrap-sass'
+
+# To generate fake data
+gem 'faker'
+
+# to apply pagination
+gem 'kaminari-mongoid'
+gem 'kaminari-actionview'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

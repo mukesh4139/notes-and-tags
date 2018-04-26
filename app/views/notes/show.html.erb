@@ -1,14 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @note.title %>
-</p>
+<ol class="breadcrumb">
+  <li><%= link_to "Notes", notes_path  %></li>
+  <li><%= @note.title %></li>
+</ol>
 
-<p>
-  <strong>Body:</strong>
-  <%= @note.body %>
-</p>
+<div class="container">
+  <dl class="dl-horizontal">
+    <dt><strong>Id:</strong></dt>
+    <dd><%= @note.id %></dd>
+    <dt><strong>Title:</strong></dt>
+    <dd><%= @note.title %></dd>
+    <dt><strong>Body:</strong></dt>
+    <dd><%= @note.body %></dd>
+    <dt><strong>Tags:</strong></dt>
+    <dd>
+      <% @note.tags.each do|tag| %>
+          <div><%= tag.title %></div>
+      <% end %>
+    </dd>
+  </dl>
 
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+  <div class="form-actions">
+    <div class="col-sm-offset-1">
+      <%= link_to 'Back', root_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+</div>
