@@ -148,9 +148,7 @@ test:
 production:
   clients:
     default:
-      database: notes_and_tags_production
-      hosts:
-        - localhost:27017
+      uri: <%= ENV['MONGODB_URI'] %>
       options:
         read:
           mode: :primary
