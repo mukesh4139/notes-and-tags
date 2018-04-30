@@ -6,7 +6,7 @@ This is a rails backend system with two models - Note and Tag. Each Note in the 
 
 ## Dependencies
             * Ruby Version    : 2.1.2
-            * Rails           : 4.2.6
+            * Rails           : 4.1.2
             * faker
             * kaminari-mongoid
             * rspec
